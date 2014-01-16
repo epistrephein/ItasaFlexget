@@ -1,9 +1,13 @@
-Itasa Flexget plugin (v 1.3.2)
+Itasa Flexget plugin (v 1.3.2, porting per Flexget 1.2)
 ==============================
 
 - [Flexget](http://www.flexget.com) 
 - [Itasa](http://italiansubs.net)
 - [ItasaFlexget forum post on Itasa](http://www.italiansubs.net/forum/hardware-software/itasa-flexget-plugin/)
+
+porting per Flexget 1.2 del plugin ItasaFlexget.
+il codice è sostanzialmente identico, cambia solo l'interfacciamente con la nuova struttura dei plugin
+
 
 Install
 -------
@@ -11,11 +15,11 @@ Drop `ItasaFlexGet.py` in `~/.flexget/plugins`
 
 Flexget compatibility
 ---------------------
-Both last and older version, both download phase method (on_feed_download, on_task_download)
+tested with Flexget 1.2.37
 
 Flexget config.yml examples
 ---------------------------
-```
+
 feeds:
   myitasa:
     rss: http://www.italiansubs.net/index.php?option=com_rsssub...  #myitasa or itasa subtitle feed
@@ -24,15 +28,9 @@ feeds:
       username: itasaUsername
       password: itasaPassword
       path: ~/subtitle/download/folder # absolute or starting from $HOME
-      messages:
-        - Grazie
-        - Grazie mille!!!
-        - Mitici
-```
 
 Features
 ---------------------------
-* Optional parameter messages: plugin will post a message on subtitle page, message will be choose amongst configured messages.
 * Extracted fields:
   * title
   * output _downloaded zip path_
@@ -44,3 +42,5 @@ Test
 ----------------------------
 `python2 -m unittest test`
 Test will ask for itasa username and password
+
+TODO : verify if still working
