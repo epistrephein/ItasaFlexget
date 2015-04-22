@@ -6,6 +6,7 @@ import urllib, urllib2, cookielib, urlparse
 import os, random, re
 from contextlib import closing
 from BeautifulSoup import BeautifulSoup
+from flexget.utils.template import render_from_entry
 import json
 
 log = logging.getLogger('download')
@@ -58,7 +59,7 @@ class Itasa(object):
 
     def on_task_output(self, task, config):
         for entry in task.accepted:
-            #log.info('entry: %s' % entry)
+            log.info('entry: %s' % entry)
             if entry.get('urls'):
                 urls = entry.get('urls')
             else:
@@ -70,7 +71,11 @@ class Itasa(object):
                         content = page.read()
                         z = self._zip(content)
                         filename = z.headers.dict['content-disposition'].split('=')[1]
-                        filename = os.path.join(config.get('path'),filename)
+                        path = config.get('path')
+                        #log.info("configured path : %s", path)
+                        path = render_from_entry(path, entry)
+                        #log.info("rendered path : %s", path)
+                        filename = os.path.join(path,filename)
                         filename = os.path.expanduser(filename)
                         soup = BeautifulSoup(content)
                         with open(filename,'wb') as f:
