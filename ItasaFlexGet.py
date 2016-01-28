@@ -5,7 +5,7 @@ from flexget.event import event
 import urllib, urllib2, cookielib, urlparse
 import os, random, re
 from contextlib import closing
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 from flexget.utils.template import render_from_entry
 import json
 
