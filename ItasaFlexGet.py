@@ -77,7 +77,7 @@ class Itasa(object):
                         #log.info("rendered path : %s", path)
                         filename = os.path.join(path,filename)
                         filename = os.path.expanduser(filename)
-                        soup = BeautifulSoup(content)
+                        soup = BeautifulSoup(content, "html.parser")
                         with open(filename,'wb') as f:
                             f.write(z.read())
                             entry['output'] = filename
